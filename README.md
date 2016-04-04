@@ -1,0 +1,2 @@
+# SpotifyGroupPlayer
+Friends and Spotify
