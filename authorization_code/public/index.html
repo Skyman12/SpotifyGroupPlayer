@@ -102,6 +102,8 @@
               refresh_token: refresh_token
             });
 
+            var userId;
+
             $.ajax({
                 url: 'https://api.spotify.com/v1/me',
                 headers: {
@@ -110,11 +112,31 @@
                 success: function(response) {
                   //userProfilePlaceholder.innerHTML = getPlaylists(response);
                   userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-
+                  userId = response['id'];
+                    console.log(access_token);
                   $('#login').hide();
                   $('#loggedin').show();
                 }
             });
+
+          $.ajax({
+              type: "Post",
+              url: 'https://api.spotify.com/v1/users/' + 'blake.skaja' + '/playlists',
+              data: {
+                  "name": "TestPlaylist",
+                  "public" : true
+              },
+              headers: {
+                  'Authorization': 'Bearer ' + access_token,
+                  'Content-Type' : "application/json"
+              },
+              success: function(response) {
+                  console.log("here");
+              },
+              error : function(response) {
+                  console.log(response['message']);
+              }
+          });
           } else {
               // render initial screen
               $('#login').show();
