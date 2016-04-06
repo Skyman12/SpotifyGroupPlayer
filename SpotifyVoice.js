@@ -52,16 +52,9 @@
 
     if (annyang) {
         // Let's define our first command. First the text we expect, and then the function it should call
-		
-		var hello = function() {
-		  console.log("Hi there");
-		};
-		
-		 var commands = {
-      'hello (there)':        hello
-		};
 	
-        /*var commands = {
+	
+        var commands = {
             'stop': function () {
                 audio.pause();
             },
@@ -92,7 +85,7 @@
 			
 			
 			
-        };*/
+        };
 
         // Add our commands to annyang
         annyang.addCommands(commands);
