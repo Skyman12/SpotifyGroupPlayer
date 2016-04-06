@@ -19,6 +19,18 @@
         });
     }
 
+    function login() {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/me',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(response) {
+               console.log("here");
+            }
+        });
+    }
+
     function playSong(songName, artistName) {
         var query = songName;
         if (artistName) {
@@ -60,7 +72,10 @@
                 recognized('Play ' + song);
                 playSong(song);
             },
-
+                'login': function () {
+                recognized('Log in ');
+                login();
+            },
                 ':nomatch': function (message) {
                 recognized(message);
                 communicateAction('Sorry, I don\'t understand this action');
@@ -73,8 +88,6 @@
 
         // Start listening. You can call this here, or attach this call to an event, button, etc.
         annyang.start();
-		
-		console.log("We are a go captain");
     }
 
     annyang.addCallback('error', function () {
