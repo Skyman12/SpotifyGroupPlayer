@@ -52,7 +52,16 @@
 
     if (annyang) {
         // Let's define our first command. First the text we expect, and then the function it should call
-        var commands = {
+		
+		var hello = function() {
+		  console.log("Hi there");
+		};
+		
+		 var commands = {
+      'hello (there)':        hello
+		};
+	
+        /*var commands = {
             'stop': function () {
                 audio.pause();
             },
@@ -81,13 +90,18 @@
                 communicateAction('Sorry, I don\'t understand this action');
             },
 			
-        };
+			
+			
+        };*/
 
         // Add our commands to annyang
         annyang.addCommands(commands);
-
+		annyang.debug();
+		annyang.setLanguage('en');
+		
         // Start listening. You can call this here, or attach this call to an event, button, etc.
         annyang.start();
+		console.log("started");
     }
 
     annyang.addCallback('error', function () {
