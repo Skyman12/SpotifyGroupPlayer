@@ -118,25 +118,40 @@
                   $('#loggedin').show();
                 }
             });
+//          $.ajax({
+//              url: 'https://api.spotify.com/v1/users/blake.skaja/playlists',
+//              method: "POST",
+//              params: {
+//                  "name": "TestPlaylist"
+//              },
+//              headers: {
+//                  'Authorization': 'Bearer ' + access_token,
+//                  'Accept' : "application/json"
+//              },
+//              success: function(response) {
+//                  console.log("here");
+//              },
+//              error : function(response) {
+//                  console.log(response['message']);
+//              }
+//          });
 
-          $.ajax({
-              type: "Post",
-              url: 'https://api.spotify.com/v1/users/' + 'blake.skaja' + '/playlists',
-              data: {
-                  "name": "TestPlaylist",
-                  "public" : true
-              },
-              headers: {
-                  'Authorization': 'Bearer ' + access_token,
-                  'Content-Type' : "application/json"
-              },
-              success: function(response) {
-                  console.log("here");
-              },
-              error : function(response) {
-                  console.log(response['message']);
-              }
-          });
+              $.ajax('https://api.spotify.com/v1/users/blake.skaja/playlists', {
+                  method: "POST",
+                  data: {
+                      "name": "TestPlaylist"
+                  },
+                  headers: {
+                      'Authorization': 'Bearer ' + access_token,
+                      'Content-Type' : "application/json"
+                  },
+                  success: function(response) {
+                      console.log("here");
+                  },
+                  error : function(response) {
+                      console.log(response['message']);
+                  }
+              });
           } else {
               // render initial screen
               $('#login').show();
