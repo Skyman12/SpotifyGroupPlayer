@@ -7,17 +7,17 @@
 	<script src="jquery-1.10.1.min.js"></script>
 	<script src="annyang.min.js"></script>
 	<script src="SpotifyVoice.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 	<!--<script src="spotifyPlayer.js"></script>-->
-	
-	
 	
 </head>
 <body>
-
-<main>
+<div class="background-image"></div>
+<main class="content">
     <div id="commands">
-         <h1>Play songs through voice commands</h1>
-         <p>This demo uses speech recognition and the <a href="https://developer.spotify.com/web-api/">Spotify Web API</a> to play songs. Try it using some of the commands below. Remember to allow the use of the microphone.</p>
+        <h1>Play songs through voice commands</h1>
+        <p>This demo uses speech recognition and the <a href="https://developer.spotify.com/web-api/">Spotify Web API</a> to play songs. Try it using some of the commands below. Remember to allow the use of the microphone.</p>
         <p>For instance "Play Some Nights"</p>
         
         <h2>Voice commands</h2>
@@ -27,7 +27,7 @@
         </ul>
     </div>
     <div id="conversation"></div>
-</main>
+    <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3A1270492723%3Aplaylist%3A7wjC8uv1jXa5bV15BVDo03" width="640" height="720" frameborder="0" allowtransparency="true" align="middle"></iframe></main>
 <footer>This demo uses the Spotify Web API and the library <a href="https://github.com/TalAter/annyang">annyang</a> to make it easy to match recognised text with rules.</footer>
 
 </body>
