@@ -16,6 +16,9 @@ var client_id = '535ff27620ae41c98251737c5f2edb3c'; // Your client id
 var client_secret = 'f58a86a9498a434b901e1ac0d7eb0b00'; // Your client secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
+var global_access_token;
+var global_username;
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -89,6 +92,8 @@ app.get('/callback', function(req, res) {
 
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
+
+        global_access_token = access_token;
 
         var options = {
           url: 'https://api.spotify.com/v1/me',

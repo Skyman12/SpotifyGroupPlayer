@@ -31,6 +31,20 @@
         });
     }
 
+    function getUserID () {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/me',
+            headers: {
+                'Authorization': 'Bearer ' + global_access_token
+            },
+            success: function(response) {
+                return response['id'];
+            }
+        });
+
+        return null;
+    }
+
     function playSong(songName, artistName) {
         var query = songName;
         if (artistName) {
@@ -38,6 +52,69 @@
         }
 
         searchTracks(query);
+    }
+
+    function getSongURI(songName, artistName)
+    {
+        var query = songName;
+        if (artistName) {
+            query += ' artist:' + artistName;
+        }
+
+        $.ajax({
+            url: 'https://api.spotify.com/v1/search',
+            data: {
+                q: query,
+                type: 'track'
+            },
+            success: function (response) {
+                if (response.tracks.items.length) {
+                    var track = response.tracks.items[0];
+                }
+            }
+        });
+    }
+
+    function createPlaylist(playlistName) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/users/' + getUserID() + '/playlists',
+            method: "POST",
+            params: {
+                "name": playlistName
+            },
+            headers: {
+                'Authorization': 'Bearer ' + access_token,
+                'Accept' : "application/json"
+            },
+            success: function(response) {
+                console.log("here");
+            },
+            error : function(response) {
+                console.log(response['message']);
+            }
+        });
+    }
+
+    function addSongToPlaylist(playlistName, song, artist) {
+        getSongURI(song, artist);
+
+        $.ajax({
+            url: 'https://api.spotify.com/v1/users/' + getUserID() + '/playlists/' + playlistName + '/tracks',
+            method: "POST",
+            params: {
+                "uris": playlistName
+            },
+            headers: {
+                'Authorization': 'Bearer ' + access_token,
+                'Accept' : "application/json"
+            },
+            success: function(response) {
+                console.log("here");
+            },
+            error : function(response) {
+                console.log(response['message']);
+            }
+        });
     }
 
     function communicateAction(text) {
@@ -73,6 +150,18 @@
                 'play *song': function (song) {
                 recognized('Play ' + song);
                 playSong(song);
+            },
+                'create playlist *name': function (name) {
+                recognized('Create playlist ' + name);
+                createPlaylist(name);
+            },
+                'add *song to *name': function (song, name) {
+                recognized('add  ' + song + " to " + name);
+                addSongToPlaylist(name, song, null);
+            },
+                'add *song by *artist to *name': function (song, artist, name) {
+                recognized('add  ' + song + " by " + artist + " to " + name);
+                addSongToPlaylist(name, song, artist);
             },
                 'login': function () {
                 recognized('Log in ');

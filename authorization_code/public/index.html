@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>Example of the Authorization Code flow with Spotify</title>
+      <script src="jquery-1.10.1.min.js"></script>
+      <script src="annyang.min.js"></script>
+      <script src="SpotifyVoice.js"></script>
+      <script src="../app.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style type="text/css">
       #login, #loggedin {
@@ -27,36 +31,30 @@
         </div>
         <div id="oauth">
         </div>
-        <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
     </div>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
-      <h1>Logged in as {{display_name}}</h1>
-      <div class="media">
-        <div class="pull-left">
-          <img class="media-object" width="150" src="{{images.0.url}}" />
-        </div>
-        <div class="media-body">
-          <dl class="dl-horizontal">
-            <dt>Display name</dt><dd class="clearfix">{{display_name}}</dd>
-            <dt>Id</dt><dd>{{id}}</dd>
-            <dt>Email</dt><dd>{{email}}</dd>
-            <dt>Spotify URI</dt><dd><a href="{{external_urls.spotify}}">{{external_urls.spotify}}</a></dd>
-            <dt>Link</dt><dd><a href="{{href}}">{{href}}</a></dd>
-            <dt>Profile Image</dt><dd class="clearfix"><a href="{{images.0.url}}">{{images.0.url}}</a></dd>
-            <dt>Country</dt><dd>{{country}}</dd>
-          </dl>
-        </div>
-      </div>
+        <main class="content">
+            <div id="commands">
+                <h1>Play songs and create playlist with only your voice</h1>
+                <h2>Voice commands</h2>
+                <ul>
+                    <li>Play {song name}</li>
+                    <li>Play {song name} by {artist name}</li>
+                    <li>Create playlist {playlist name}</li>
+                    <li>Add {song name} to {playlist name} </li>
+                    <li>Add {song name} by {artist name} to {playlist name}}</li>
+                </ul>
+            </div>
+            <div id="conversation"></div>
+            <div align="middle">
+                <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3A1270492723%3Aplaylist%3A7wjC8uv1jXa5bV15BVDo03" width="640" height="720" frameborder="0" allowtransparency="true" align="middle"></iframe>
+            </div>
+        </main>
     </script>
 
     <script id="oauth-template" type="text/x-handlebars-template">
-      <h2>oAuth info</h2>
-      <dl class="dl-horizontal">
-        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-        <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}></dd>
-      </dl>
     </script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
@@ -110,7 +108,6 @@
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                  //userProfilePlaceholder.innerHTML = getPlaylists(response);
                   userProfilePlaceholder.innerHTML = userProfileTemplate(response);
                   userId = response['id'];
                     console.log(access_token);
@@ -118,40 +115,6 @@
                   $('#loggedin').show();
                 }
             });
-//          $.ajax({
-//              url: 'https://api.spotify.com/v1/users/blake.skaja/playlists',
-//              method: "POST",
-//              params: {
-//                  "name": "TestPlaylist"
-//              },
-//              headers: {
-//                  'Authorization': 'Bearer ' + access_token,
-//                  'Accept' : "application/json"
-//              },
-//              success: function(response) {
-//                  console.log("here");
-//              },
-//              error : function(response) {
-//                  console.log(response['message']);
-//              }
-//          });
-
-              $.ajax('https://api.spotify.com/v1/users/blake.skaja/playlists', {
-                  method: "POST",
-                  data: {
-                      "name": "TestPlaylist"
-                  },
-                  headers: {
-                      'Authorization': 'Bearer ' + access_token,
-                      'Content-Type' : "application/json"
-                  },
-                  success: function(response) {
-                      console.log("here");
-                  },
-                  error : function(response) {
-                      console.log(response['message']);
-                  }
-              });
           } else {
               // render initial screen
               $('#login').show();

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Spotify Party Player</title>
 	
-	<script src="jquery-1.10.1.min.js"></script>
-	<script src="annyang.min.js"></script>
-	<script src="SpotifyVoice.js"></script>
+	<script src="authorization_code/public/jquery-1.10.1.min.js"></script>
+	<script src="authorization_code/public/annyang.min.js"></script>
+	<script src="authorization_code/public/SpotifyVoice.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 	<!--<script src="spotifyPlayer.js"></script>-->
@@ -27,7 +27,10 @@
         </ul>
     </div>
     <div id="conversation"></div>
-    <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3A1270492723%3Aplaylist%3A7wjC8uv1jXa5bV15BVDo03" width="640" height="720" frameborder="0" allowtransparency="true" align="middle"></iframe></main>
+    <div align="middle">
+        <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3A1270492723%3Aplaylist%3A7wjC8uv1jXa5bV15BVDo03" width="640" height="720" frameborder="0" allowtransparency="true" align="middle"></iframe>
+    </div>
+</main>
 <footer>This demo uses the Spotify Web API and the library <a href="https://github.com/TalAter/annyang">annyang</a> to make it easy to match recognised text with rules.</footer>
 
 </body>
