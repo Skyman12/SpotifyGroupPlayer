@@ -70,6 +70,7 @@
             success: function (response) {
                 if (response.tracks.items.length) {
                     var track = response.tracks.items[0];
+                    return track['uri'];
                 }
             }
         });
@@ -102,7 +103,7 @@
             url: 'https://api.spotify.com/v1/users/' + getUserID() + '/playlists/' + playlistName + '/tracks',
             method: "POST",
             params: {
-                "uris": playlistName
+                "uris": getSongURI(song, artist)
             },
             headers: {
                 'Authorization': 'Bearer ' + access_token,

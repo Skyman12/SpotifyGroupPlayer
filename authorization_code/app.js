@@ -17,7 +17,6 @@ var client_secret = 'f58a86a9498a434b901e1ac0d7eb0b00'; // Your client secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 var global_access_token;
-var global_username;
 
 /**
  * Generates a random string containing numbers and letters

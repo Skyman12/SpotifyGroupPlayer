@@ -7,17 +7,7 @@
       <script src="SpotifyVoice.js"></script>
       <script src="../app.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <style type="text/css">
-      #login, #loggedin {
-        display: none;
-      }
-      .text-overflow {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 500px;
-      }
-    </style>
+      <link href="style.css" rel="stylesheet">
   </head>
 
   <body>
@@ -35,6 +25,7 @@
     </div>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
+        <div class="background-image"></div>
         <main class="content">
             <div id="commands">
                 <h1>Play songs and create playlist with only your voice</h1>
